@@ -71,8 +71,8 @@ public class player : MonoBehaviour
         Dictionary<int, string> objects = new Dictionary<int, string>()
         {
             [0] = "book", [1] = "enableLight", [2] = "defeat",
-            [3] = "chemistry(Clone)", [4] = "algebra(Clone)", [5] = "morze(Clone)",
-            [6] = "code(Clone)", [7] = "bomb", [8] = "scheme(Clone)", 
+            [3] = "Chemistry(Clone)", [4] = "algebra(Clone)", [5] = "morze(Clone)",
+            [6] = "code(Clone)", [7] = "bomb", [8] = "Scheme(Clone)", 
             [9] = "boxExtrem", [10] = "batteryScheme", [11] = "phis(Clone)"
         };
 

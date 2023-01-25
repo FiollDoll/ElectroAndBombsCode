@@ -67,7 +67,6 @@ public class code : MonoBehaviour
             // Добавить ещё учёт сделанных машин
             for (int i = 0; i < 3; i++)
                 _codeInput[i].interactable = false;
-            
         }  
     }
 
