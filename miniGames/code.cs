@@ -12,6 +12,8 @@ public class code : MonoBehaviour
     
     private int _codeMode;
 
+    public map _scriptMap;
+
     private void Start()
     {
         _codeMode = Random.Range(0, 2);
@@ -64,7 +66,7 @@ public class code : MonoBehaviour
         if (_codeInput[0].text == _trueAnswers[0] && _codeInput[1].text == _trueAnswers[1] && _codeInput[2].text == _trueAnswers[2])
         {
             this.gameObject.SetActive(false);
-            // Добавить ещё учёт сделанных машин
+            _scriptMap.GamesReadyUpdate();
             for (int i = 0; i < 3; i++)
                 _codeInput[i].interactable = false;
         }  

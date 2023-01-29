@@ -17,9 +17,12 @@ public class Chemistry : MonoBehaviour
 
     [Header("Elements")]
     [SerializeField] private Text[] _textElements = new Text[4];
-    private string[] _trueAnswer = new string[4];
+    [SerializeField] private InputField[] _playerInput = new InputField[4];
+    public string[] _trueAnswer = new string[4];
     private string[] _answerPlayer = new string[4];
-    private InputField[] _playerInput = new InputField[4];
+
+    [Header("Other")]
+    public map _scriptMap;
 
     private void Start()
     {
@@ -38,8 +41,8 @@ public class Chemistry : MonoBehaviour
             ["H"] = "NM", ["He"] = "NM", ["Li"] = "M", ["C"] = "NM", ["N"] = "NM",
             ["O"] = "NM", ["F"] = "NM", ["Na"] = "M", ["Mg"] = "M", ["Al"] = "M",
             ["Si"] = "NM", ["P"] = "NM", ["Cl"] = "NM", ["K"] = "M", ["Ca"] = "M",
-            ["Ti"] = "M", ["Cr"] = "M", ["Mn"] = "M", ["Fe"] = "M", ["Co"] = "M",
-            ["S"] = "NM", ["Ge"] = "M", ["As"] = "NM", ["Se"] = "NM", ["Br"] = "NM"
+            ["Ti"] = "M", ["Cr"] = "M", ["Mn"] = "M", ["Fe"] = "M",
+            ["S"] = "NM", ["Be"] = "M"
         };
             for (int i = 0; i < 8; i++)
             {
@@ -74,22 +77,23 @@ public class Chemistry : MonoBehaviour
         if (answersTrue == 8)
         {
             this.gameObject.SetActive(false);
-            // Добавить ещё учёт сделанных машин
-            for (int i = 0; i < 3; i++)
+            _scriptMap.GamesReadyUpdate();
+            for (int i = 0; i < 8; i++)
                 _textElementsMettalOrNot[i].text = "///";
         }
-
     }
 
     private void ElementsGenerate()
     {
         Dictionary<string, string> elements = new Dictionary<string, string>()
         {
-            ["H"] = "водород", ["He"] = "гелий", ["Li"] = "литий", ["B"] = "бор",
-            ["C"] = "углерод", ["Be"] = "берилий", ["Al"] = "алюминий", ["Mg"] = "магний",
-            ["Si"] = "кремний", ["Na"] = "натрий", ["O"] = "кислород", ["F"] = "фтор",
-            ["P"] = "фосфор", ["Cu"] = "медь", ["Zn"] = "цинк", ["I"] = "йод",
-            ["Mn"] = "марганец", ["Fe"] = "железо", ["K"] = "калий", ["Ca"] = "кальций"
+            ["h"] = "водород", ["he"] = "гелий", ["li"] = "литий", ["b"] = "бор",
+            ["c"] = "углерод", ["be"] = "берилий", ["al"] = "алюминий", ["mg"] = "магний",
+            ["si"] = "кремний", ["na"] = "натрий", ["o"] = "кислород", ["f"] = "фтор",
+            ["p"] = "фосфор", ["zn"] = "цинк", ["mn"] = "марганец", ["fe"] = "железо",
+            ["k"] = "калий", ["ca"] = "кальций", ["n"] = "азот", ["ne"] = "неон",
+            ["cl"] = "хлор", ["ar"] = "аргон", ["sc"] = "скандий", ["ti"] = "титан", 
+            ["v"] = "ванадий", ["cr"] = "хром"
         };
         int mode = Random.Range(0, 2);
 
@@ -109,6 +113,26 @@ public class Chemistry : MonoBehaviour
         }    
     }
 
+    public void ElementsCheck()
+    {
+        int answersTrue = 0;
+        for (int i = 0; i < 4; i++)
+        {
+            _playerInput[i].text = _playerInput[i].text.ToLower();
+            if (_playerInput[i].text == _trueAnswer[i])
+                answersTrue++;
+            else
+                answersTrue--;
+            Debug.Log(answersTrue);
+        }
+        if (answersTrue == 4)
+        {
+            this.gameObject.SetActive(false);
+            _scriptMap.GamesReadyUpdate();
+            for (int i = 0; i < 3; i++)
+                _textElements[i].text = "///";
+        }
+    }
 
     public void MenuExit()
     {

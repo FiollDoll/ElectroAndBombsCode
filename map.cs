@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class map : MonoBehaviour
 {
+    public int readyGames;
     public float _timerLamp;
     public bool lampEnable;
 
@@ -42,6 +43,15 @@ public class map : MonoBehaviour
             _objectsInScene[_objectNum] = 1;
             _spawnersActive[_spawnerNum] = 1;
         }        
+    }
+
+    public void GamesReadyUpdate()
+    {
+        readyGames++;
+        if (readyGames == 5)
+        {
+            
+        }
     }
 
     private void Update()
