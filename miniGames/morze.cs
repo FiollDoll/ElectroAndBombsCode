@@ -45,9 +45,4 @@ public class morze : MonoBehaviour
                 _morzeInput[i].interactable = false;
         }
     }
-
-    public void ExitMorze()
-    {
-        this.gameObject.SetActive(false);
-    }
 }

@@ -20,9 +20,4 @@ public class bookMenu : MonoBehaviour
         _pageMain.gameObject.SetActive(true);
         _page.gameObject.SetActive(false);
     }
-
-    public void ExitBook()
-    {
-        this.gameObject.SetActive(false);
-    }
 }

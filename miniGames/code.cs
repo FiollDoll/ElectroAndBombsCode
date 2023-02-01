@@ -29,7 +29,6 @@ public class code : MonoBehaviour
             ["6"] = "f", ["7"] = "g", ["8"] = "h",
             ["9"] = "j"
         };
-
         if (_codeMode == 0)
         {
             for (int i = 0; i < 3; i++)
@@ -70,10 +69,5 @@ public class code : MonoBehaviour
             for (int i = 0; i < 3; i++)
                 _codeInput[i].interactable = false;
         }  
-    }
-
-    public void ExitMenu()
-    {
-        this.gameObject.SetActive(false);
     }
 }

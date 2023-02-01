@@ -45,6 +45,7 @@ public class enableLight : MonoBehaviour
             _trueAnswers++;
         else
             _trueAnswers = 0;
+
         _pointsArwer.text = _trueAnswers.ToString();
         _inputAnswer.text = "";
         if (_trueAnswers == 5)
@@ -54,10 +55,5 @@ public class enableLight : MonoBehaviour
             this.gameObject.SetActive(false);
         }
         GenerateNumbersAndAnswer();
-    }
-
-    public void ExitMenu()
-    {
-        this.gameObject.SetActive(false);
     }
 }

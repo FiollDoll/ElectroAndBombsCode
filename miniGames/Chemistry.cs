@@ -112,7 +112,7 @@ public class Chemistry : MonoBehaviour
             }
         }    
     }
-
+    
     public void ElementsCheck()
     {
         int answersTrue = 0;
@@ -132,10 +132,5 @@ public class Chemistry : MonoBehaviour
             for (int i = 0; i < 3; i++)
                 _textElements[i].text = "///";
         }
-    }
-
-    public void MenuExit()
-    {
-        this.gameObject.SetActive(false);
     }
 }
