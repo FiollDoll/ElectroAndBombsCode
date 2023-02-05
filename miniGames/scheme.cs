@@ -20,9 +20,11 @@ public class scheme : MonoBehaviour
     [SerializeField] private GameObject _panelChoicePlace;
 
     [Header("Other")]
+    [SerializeField] private Text _textError;
     [SerializeField] private map _scriptMap;
-    public string[] _playerAnswer = new string[4];
-    public string[] _trueAnswers = new string[4];
+    [SerializeField] private menusOptions _scriptMenus;
+    [SerializeField] private string[] _playerAnswer = new string[5];
+    [SerializeField] private string[] _trueAnswers = new string[5];
 
     private int _totalPlace;
 
@@ -33,31 +35,29 @@ public class scheme : MonoBehaviour
             ["lampGreen"] = 0, ["lampBlue"] = 1, ["lampRed"] = 2,
             ["lampYellow"] = 3, ["key"] = 4, ["zvonok"] = 5
         };
-        int randomScheme = Random.Range(0, 13);
+        int randomScheme = Random.Range(0, 11);
         if (randomScheme == 0)
-            NewTrueAnswer(0, "key", "lampRed", "lampBlue");
+            NewTrueAnswer(0, "key", "lampGreen", "lampGreen", "lampRed", "zvonok");
         else if (randomScheme == 1)
-            NewTrueAnswer(1, "lampGreen", "key", "lampBlue", "lampGreen");
+            NewTrueAnswer(1, "zvonok", "lampRed", "key");
         else if (randomScheme == 2)
-            NewTrueAnswer(2, "key", "Green");
+            NewTrueAnswer(2, "key", "zvonok", "lampRed", "lampYellow", "lampGreen");
         else if (randomScheme == 3)
-            NewTrueAnswer(3, "lampGreen", "lampRed", "lampBlue");
+            NewTrueAnswer(3, "key", "zvonok");
         else if (randomScheme == 4)
-            NewTrueAnswer(4, "zvonok", "key", "lampRed");    
+            NewTrueAnswer(4, "key", "zvonok", "zvonok");    
         else if (randomScheme == 5)
-            NewTrueAnswer(4, "zvonok", "key", "lampRed");  
+            NewTrueAnswer(5, "key", "lampBlue");  
         else if (randomScheme == 6)
-            NewTrueAnswer(4, "zvonok", "key", "lampRed");  
+            NewTrueAnswer(6, "key", "lampGreen", "lampBlue", "zvonok", "lampRed");  
         else if (randomScheme == 7)
-            NewTrueAnswer(4, "zvonok", "key", "lampRed");  
+            NewTrueAnswer(7, "lampBlue", "key", "lampGreen", "zvonok", "lampRed");  
         else if (randomScheme == 8)
-            NewTrueAnswer(4, "zvonok", "key", "lampRed");  
+            NewTrueAnswer(8, "lampGreen", "lampBlue", "key", "lampRed", "zvonok");  
         else if (randomScheme == 9)
-            NewTrueAnswer(4, "zvonok", "key", "lampRed");  
+            NewTrueAnswer(9, "lampGreen", "lampBlue", "key", "lampRed", "zvonok");  
         else if (randomScheme == 10)
-            NewTrueAnswer(4, "zvonok", "key", "lampRed");  
-        else if (randomScheme == 11)
-            NewTrueAnswer(4, "zvonok", "key", "lampRed");  
+            NewTrueAnswer(10, "key", "lampGreen", "lampBlue", "zvonok", "lampRed");   
     }
 
     private void NewTrueAnswer(int schemeBg, string obj = "", string obj1 = "", string obj2 = "", string obj3 = "", string obj4 = "")
@@ -66,12 +66,13 @@ public class scheme : MonoBehaviour
         _trueAnswers[1] = obj1;
         _trueAnswers[2] = obj2;
         _trueAnswers[3] = obj3;
+        _trueAnswers[4] = obj4;
         _bgScheme.GetComponent<Image>().sprite = _bgSchemeSprite[schemeBg];
         _vars[schemeBg].gameObject.SetActive(true);
         _vars[schemeBg].transform.name = "varTotal";
-        for (int i = 1; i < _buttonsInVars.Length; i++)
+        for (int i = 1; i < _buttonsInVars.Length + 1; i++)
             _buttonsInVars[i - 1] = GameObject.Find($"Canvas/menus/SchemeMenu/vars/varTotal/Button{i}");
-        for (int i = 0; i < _vars.Length; i++)
+        for (int i = 0; i < _vars.Length + 1; i++)
             Destroy(GameObject.Find($"Canvas/menus/SchemeMenu/vars/var{i}"));
     }
 
@@ -88,12 +89,14 @@ public class scheme : MonoBehaviour
         _totalPlace = place;
     }
 
-    public void Check()
+    public void CheckScheme()
     {
-        if (_trueAnswer[0] == _answerPlayer[0] || _trueAnswer[1] == _answerPlayer[1] || _trueAnswer[2] == _answerPlayer[2] || _trueAnswer[3] == _answerPlayer[3] || _trueAnswer[4] == _answerPlayer[4] || _trueAnswer[5] == _answerPlayer[5])
+        if (_trueAnswers[0] == _playerAnswer[0] && _trueAnswers[1] == _playerAnswer[1] && _trueAnswers[2] == _playerAnswer[2] && _trueAnswers[3] == _playerAnswer[3] && _trueAnswers[4] == _playerAnswer[4])
         {
             this.gameObject.SetActive(false);
             _scriptMap.GamesReadyUpdate();
         }
+        else
+            _scriptMenus.ViewError(_textError);
     } 
 }

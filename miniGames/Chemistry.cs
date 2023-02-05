@@ -22,7 +22,9 @@ public class Chemistry : MonoBehaviour
     private string[] _answerPlayer = new string[4];
 
     [Header("Other")]
-    public map _scriptMap;
+    [SerializeField] private Text _textError;
+    [SerializeField] private map _scriptMap;
+    [SerializeField] private menusOptions _scriptMenus;
 
     private void Start()
     {
@@ -132,5 +134,7 @@ public class Chemistry : MonoBehaviour
             for (int i = 0; i < 3; i++)
                 _textElements[i].text = "///";
         }
+        else
+            _scriptMenus.ViewError(_textError);
     }
 }

@@ -10,7 +10,9 @@ public class morze : MonoBehaviour
 
     public string[] _trueAnswers = new string[3];
     
-    public map _scriptMap;
+    [SerializeField] private Text _textError;
+    [SerializeField] private map _scriptMap;
+    [SerializeField] private menusOptions _scriptMenus;
 
     private void Start()
     {
@@ -44,5 +46,7 @@ public class morze : MonoBehaviour
             for (int i = 0; i < 3; i++)
                 _morzeInput[i].interactable = false;
         }
+        else
+            _scriptMenus.ViewError(_textError);
     }
 }

@@ -4,25 +4,24 @@ using UnityEngine.UI;
 
 public class menusOptions : MonoBehaviour
 {
-    [SerializeField] private Text _textError;
 
     public void MenuExit(GameObject menu)
     {
         menu.gameObject.SetActive(false);
     }
-    
-    public void ViewError(string text)
+
+    public void ViewError(Text textError)
     {
-        StartCoroutine(TextErrorView(text));
+        StartCoroutine(TextErrorView(textError));
     }
 
-    private IEnumerator TextErrorView(string errorText)
+    private IEnumerator TextErrorView(Text textError)
     {
         // 0.5 - activate, 2 - view, 0.5 - remove
-        _textError.text = errorText;
-        _textError.GetComponent<Animator>().SetBool("view", true);
+        textError.text = "В ответе/ответах имеются ошибки";
+        textError.GetComponent<Animator>().SetBool("view", true);
         yield return new WaitForSeconds(3f);
-        _textError.GetComponent<Animator>().SetBool("view", false);
-        _textError.text = "";
+        textError.GetComponent<Animator>().SetBool("view", false);
+        textError.text = "";
     }
 }

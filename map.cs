@@ -13,7 +13,7 @@ public class map : MonoBehaviour
     [SerializeField] private Transform[] _spawners = new Transform[12];
     [SerializeField] private GameObject[] _objects = new GameObject[0];
 
-    private int[] _objectsInScene = new int[6];
+    public int[] _objectsInScene = new int[6];
     private int[] _spawnersActive = new int[14];
 
     [Header("Bomb")]
@@ -40,10 +40,18 @@ public class map : MonoBehaviour
             {
                 if (_objectsInScene[objectNum] == 1)
                     objectNum = Random.Range(0, _objects.Length);
+                else if (_objectsInScene[objectNum] == 1)
+                    objectNum = Random.Range(0, _objects.Length);
+                else if (_objectsInScene[objectNum] == 1)
+                    objectNum = Random.Range(0, _objects.Length);
             }
             for (int e = 0; e < _spawnersActive.Length; e++)
             {
                 if (_spawnersActive[spawnerNum] == 1)
+                    spawnerNum = Random.Range(0, _spawners.Length);
+                else if (_spawnersActive[spawnerNum] == 1)
+                    spawnerNum = Random.Range(0, _spawners.Length);
+                else if (_spawnersActive[spawnerNum] == 1)
                     spawnerNum = Random.Range(0, _spawners.Length);
             }
 

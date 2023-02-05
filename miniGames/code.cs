@@ -11,8 +11,10 @@ public class code : MonoBehaviour
     public string[] _trueAnswers = new string[3];
     
     private int _codeMode;
+    [SerializeField] private Text _textError;
 
-    public map _scriptMap;
+    [SerializeField] private map _scriptMap;
+    [SerializeField] private menusOptions _scriptMenus;
 
     private void Start()
     {
@@ -69,5 +71,7 @@ public class code : MonoBehaviour
             for (int i = 0; i < 3; i++)
                 _codeInput[i].interactable = false;
         }  
+        else
+            _scriptMenus.ViewError(_textError);
     }
 }

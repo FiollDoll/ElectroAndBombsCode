@@ -28,11 +28,19 @@ public class player : MonoBehaviour
     [SerializeField] private Text _textTimer;
     [SerializeField] private Text _hpText, _oxugenText, _batteryText;
 
+    [Header("Light")]
+    public bool haveBattery = true;
+    [SerializeField] private UnityEngine.Rendering.Universal.Light2D _flashlight;
+    [SerializeField] private Slider _flashLightSlider;
+    private float _flashlightStright = 1;
+    private bool _menuFlashLightOpen;
+
     [Header("Other")]
     [SerializeField] private GameObject _buttonActive;
     private string _objectTrigger;
     public float _timer;
-    [SerializeField] private UnityEngine.Rendering.Universal.Light2D _flashlight;
+
+
     private bool _openInventory;
 
     private void Start()
@@ -73,7 +81,7 @@ public class player : MonoBehaviour
             [0] = "book", [1] = "enableLight", [2] = "defeat",
             [3] = "Chemistry(Clone)", [4] = "algebra(Clone)", [5] = "morze(Clone)",
             [6] = "code(Clone)", [7] = "bomb", [8] = "Scheme(Clone)", 
-            [9] = "boxExtrem", [10] = "batteryScheme", [11] = "phis(Clone)"
+            [9] = "boxExtrem", [10] = "computer", [11] = "phis(Clone)"
         };
 
         for (int i = 0; i < objects.Count; i++)
@@ -88,6 +96,20 @@ public class player : MonoBehaviour
     {
         _menus[2].gameObject.SetActive(activate);
         _openInventory = activate;
+    }
+
+    public void MenuFlashLight()
+    {
+        if (_menuFlashLightOpen)
+        {
+            _menus[9].gameObject.SetActive(false);
+            _menuFlashLightOpen = false;
+        }
+        else
+        {
+            _menus[9].gameObject.SetActive(true);
+            _menuFlashLightOpen = true;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -106,11 +128,22 @@ public class player : MonoBehaviour
         _timer -= Time.deltaTime;
         float timerMinut = Mathf.Round(_timer);
         _textTimer.text = "Осталось времени: " + timerMinut.ToString();
-        
+        _flashlightStright = _flashLightSlider.value;
+        _flashlight.pointLightOuterRadius = _flashlightStright * 2;
         if (_battery > 0)
         {
-            _battery -= Time.deltaTime / 35;
-            _flashlight.intensity = _battery / 4;            
+            if (haveBattery)
+            {
+                _battery -= (Time.deltaTime / 35) * _flashlightStright;
+                _flashlight.intensity = _battery / 4; 
+                _flashlight.pointLightOuterRadius = _flashlightStright * 2;                 
+            }   
+            else
+            {
+                _battery = 0;
+                _flashlight.intensity = 0; 
+                _flashlight.pointLightOuterRadius = 0; 
+            }    
         }
         if (_openInventory)
         {
